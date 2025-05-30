@@ -18,3 +18,23 @@ spec:
         name: guestbook-ui
         ports:
         - containerPort: 80
+        volumeMounts:
+        - name: secret-volume
+          mountPath: "/secrets"
+          readOnly: true
+        env:
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: guestbook-ui-secret
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: guestbook-ui-secret
+              key: password
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: guestbook-ui-secret
+          defaultMode: 0400
