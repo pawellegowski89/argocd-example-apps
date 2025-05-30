@@ -22,17 +22,6 @@ spec:
         - name: secret-volume
           mountPath: "/secrets"
           readOnly: true
-        env:
-        - name: USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: guestbook-ui-secret
-              key: username
-        - name: PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: guestbook-ui-secret
-              key: password
       volumes:
       - name: secret-volume
         secret:
